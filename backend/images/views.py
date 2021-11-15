@@ -8,7 +8,7 @@ class ImageListView(ListView):
 
     def get_context_data(self, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
-        if contxt['images']:
+        if context['images']:
             id_list = [obj.id for obj in context['images']]
             context['tags'] = Tag.objects.filter(images__id__in=id_list).order_by('name').distinct()
         return context

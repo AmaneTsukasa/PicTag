@@ -1,8 +1,14 @@
+body {
+  width: 100%;
+  height: 100%;
+  background-color: #64adde;
+}
+
 .main_block {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #FFF378;
+  background-color: #e0eef8;
   width: 100%;
   height: 100%;
 }
@@ -15,7 +21,7 @@
 .link {
   width: 100px;
   height: 50px;
-  background-color: green;
+  background-color: blue;
 }
 
 .searcher {
@@ -23,15 +29,15 @@
   justify-content: center;
 }
 
-a:hover {
-  color: #FD8799;
-  background-color: #d44354;
-  transition-duration: 5s;
+.main_block a:hover {
+  color: #2b3b45;
+  background-color: #92c5e7;
+  transition-duration: 2s;
 }
 
-a {
+.main_block a {
   text-decoration: none;
-  background-color: #f44336;
+  background-color: #32566f;
   color: white;
   width: 100px;
   height: 40px;
@@ -43,7 +49,36 @@ a {
   margin: 0px 5px;
  }
 
- .main_images_href a {
-   width: 200px;
-   height: 250px;
+ .main_images_href {
+   height: 300px;
+   display: flex;
+   margin: 50px 100px;
  }
+
+ .main_images_href img{
+   width: 100%;
+   height: 100%;
+ }
+
+ input[type=search] {
+	color: blue;
+	text-align: left;
+	cursor: pointer;
+	display: block;
+	width: 40%;
+	text-shadow: 0 0 1px black;
+}
+
+input[type=submit] {
+  background-color: #32566f;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.page_icon img {
+  width: 100px;
+  height: 300px;
+}
