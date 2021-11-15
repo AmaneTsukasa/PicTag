@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta charset="UTF-8">
+    <title>Anime pictures tegger</title>
+</head>
+<body>
+    <div class="main_block">
+        <div class="links">
+            <a class="a_profile link" href="#">Profile</a>
+            <a class="a_posts link" href="#">Posts</a>
+            <a class="a_comments link" href="#">Comments</a>
+            <a class="a_tags link" href="#">Tags</a>
+            <a class="a_forum link" href="#">Forum</a>
+        </div>
+        <p class="searcher"><input type="search" name="tag" placeholder="Введите тэг">
+        <input type="submit" value="Найти"></p>
+    </div>
+    <div class="main_images_href">
+        {% for image in images %}
+        <a href="#">
+            <img src={{ image.image.url }}>
+        </a>
+        {% endfor %}
+    </div>
+</body>
+</html>
