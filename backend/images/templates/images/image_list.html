@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load thumbnail %}
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -8,7 +9,8 @@
 </head>
 <body>
     <div class="page_icon">
-      <img src="Tartaglia.full.3121367.png" alt="">
+      <img src={% static 'icons/Tartaglia.png' %}>
+      <p class="page_icon_text">ImageTagger</p>
     </div>
     <div class="main_block">
         <div class="links">
@@ -18,15 +20,24 @@
             <a class="a_tags link" href="#">Tags</a>
             <a class="a_forum link" href="#">Forum</a>
         </div>
-        <p class="searcher"><input type="search" name="tag" placeholder="Input tag">
-        <input type="submit" value="Search"></p>
+        <form class="searcher"><input type="search" name="q" placeholder="Input tag" value="{{ q|default:"" }}">
+        <input type="submit" value="Search"></form>
     </div>
     <div class="main_images_href">
         {% for image in images %}
         <a href="#">
-            <img src={{ image.image.url }}>
+            <img src={%thumbnail image.image 150x150%}>
         </a>
         {% endfor %}
+    </div>
+    <div>
+      <ul class="tag_list">
+        {% for tag in tags %}
+          <li>
+            <a href="{% url 'images:image_list' %}?q={{ tag.name }}">{{ tag.name }}({{ tag.count }})</a>
+          </li>
+        {% endfor %}
+      </ul>
     </div>
 </body>
 </html>

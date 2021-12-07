@@ -27,6 +27,7 @@ body {
 .searcher {
   display: flex;
   justify-content: center;
+  margin: 50px 0;
 }
 
 .main_block a:hover {
@@ -56,8 +57,8 @@ body {
  }
 
  .main_images_href img{
-   width: 100%;
-   height: 100%;
+   /*width: 100%;
+   height: 100%;*/
  }
 
  input[type=search] {
@@ -77,8 +78,16 @@ input[type=submit] {
   text-decoration: none;
   cursor: pointer;
 }
+.page_icon {
+  display: flex;
+}
+
+.page_icon_text {
+  font-size: 100px;
+  margin-bottom: 0;
+}
 
 .page_icon img {
-  width: 100px;
+  width: 300px;
   height: 300px;
 }
