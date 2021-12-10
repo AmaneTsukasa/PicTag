@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script type="text/javascript" src="{% static 'js/autocomplete.js' %}"></script>
     <meta charset="UTF-8">
     <title>Anime pictures tegger</title>
 </head>
@@ -20,8 +21,12 @@
             <a class="a_tags link" href="#">Tags</a>
             <a class="a_forum link" href="#">Forum</a>
         </div>
-        <form class="searcher"><input type="search" name="q" placeholder="Input tag" value="{{ q|default:"" }}">
-        <input type="submit" value="Search"></form>
+        <form id="main-search" class="searcher" autocomplete="off">
+            <input id="main-search-q" type="search" name="q" placeholder="Input tag" value="{{ q|default:""}}">
+            <ul id="main-search-suggestions">
+            </ul>
+            <input type="submit" value="Search">
+        </form>
     </div>
     <div class="main_images_href">
         {% for image in images %}

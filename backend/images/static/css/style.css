@@ -78,6 +78,13 @@ input[type=submit] {
   text-decoration: none;
   cursor: pointer;
 }
+
+#main-search-suggestions {
+  position: absolute;
+  padding: 0;
+
+}
+
 .page_icon {
   display: flex;
 }
