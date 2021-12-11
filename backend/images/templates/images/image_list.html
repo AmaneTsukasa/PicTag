@@ -22,9 +22,11 @@
             <a class="a_forum link" href="#">Forum</a>
         </div>
         <form id="main-search" class="searcher" autocomplete="off">
-            <input id="main-search-q" type="search" name="q" placeholder="Input tag" value="{{ q|default:""}}">
-            <ul id="main-search-suggestions">
-            </ul>
+            <div class="search-group">
+              <input id="main-search-q" type="search" name="q" placeholder="Input tag" value="{{ q|default:""}}">
+              <ul id="main-search-suggestions">
+              </ul>
+            </div>
             <input type="submit" value="Search">
         </form>
     </div>

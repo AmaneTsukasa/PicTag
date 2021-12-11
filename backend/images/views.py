@@ -1,6 +1,7 @@
 from operator import attrgetter
 
-from django.views.generic import ListView
+from django.http import JsonResponse
+from django.views.generic import ListView, View
 from django.db.models import Count
 
 from .models import Image, Tag
@@ -26,3 +27,18 @@ class ImageListView(ListView):
             context['tags'] = tags_qs.order_by('name').distinct()
         context['q'] = self.request.GET.get('q')
         return context
+
+
+class TagAutocompleteView(View):
+    def get(self, request):
+        qs = Tag.objects.all().order_by('name')
+
+        q = self.request.GET.get('q')
+        if q:
+            qs = qs.filter(name__icontains=q)
+        else:
+            qs = qs.none()
+
+        data = [{'name': tag.name} for tag in qs]
+
+        return JsonResponse(data, safe=False)

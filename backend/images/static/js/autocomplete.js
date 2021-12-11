@@ -1,26 +1,28 @@
 window.onload = () => {
+    document.querySelectorAll('.search-group').forEach((element) => {
+      const
+        searchField = element.querySelector('input'),
+        searchSuggestions = element.querySelector('ul');
 
-
-    const
-      searchField = document. querySelector('#main-search-q'),
-      searchSuggestions = document.querySelector('#main-search-suggestions');
-
-    function getSuggestions(value) {
-      if (value == '') return [];
-
-      const tags = [
-        'anime_boys'
-      ];
-
-      const regex = new RegExp(value);
-      return tags.filter((item) =>{
-        if (item.match(regex)) {
-          return item;
+      searchField.addEventListener('keyup', (event) => {
+        if (event.key != 'Escape') {
+          fetch(`/autocomplete/tags/?q=${event.target.value}`)
+            .then((response) => { return response.json(); })
+            .then((data) => {
+              searchSuggestions.style.display = 'block';
+              searchSuggestions.innerHTML = data.map((item) => { return `<li>${item.name}</li>` }).join('');
+            });
         }
-      })
-    }
-    searchField.addEventListener('keyup', (event) => {
-      const suggestions = getSuggestions(event.target.value);
-      searchSuggestions.innerHTML = suggestions.map((value) => {return `<li>${value}</li>`}).join('');
+      });
+
+      searchSuggestions.addEventListener('click', (event) => {
+        searchField.value = event.target.textContent;
+      });
+
+      document.addEventListener('click', (event) => {
+        if (event.target != searchField) {
+          searchSuggestions.style.display = 'none';
+        }
+      });
     });
 }
