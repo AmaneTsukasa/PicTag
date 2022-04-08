@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from hashlib import md5
 
@@ -8,6 +9,9 @@ class Image(models.Model):
     height = models.IntegerField(null=True, blank=True)
     width = models.IntegerField(null=True, blank=True)
     tags = models.ManyToManyField("Tag", related_name="images", blank=True)
+    uploader = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name='uploaded_images', null=True, blank=True, on_delete=models.SET_NULL)
+    uploaded = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'Image #{self.id}'

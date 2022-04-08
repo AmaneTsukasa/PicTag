@@ -1,50 +1,40 @@
-<!DOCTYPE html>
-{% load static %}
+{% extends 'base.html' %}
+
 {% load thumbnail %}
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script type="text/javascript" src="{% static 'js/autocomplete.js' %}"></script>
-    <meta charset="UTF-8">
-    <title>Anime pictures tegger</title>
-</head>
-<body>
-    <div class="page_icon">
-      <img src={% static 'icons/Tartaglia.png' %}>
-      <p class="page_icon_text">ImageTagger</p>
-    </div>
-    <div class="main_block">
-        <div class="links">
-            <a class="a_profile link" href="#">Profile</a>
-            <a class="a_posts link" href="#">Posts</a>
-            <a class="a_comments link" href="#">Comments</a>
-            <a class="a_tags link" href="#">Tags</a>
-            <a class="a_forum link" href="#">Forum</a>
-        </div>
-        <form id="main-search" class="searcher" autocomplete="off">
-            <div class="search-group">
-              <input id="main-search-q" type="search" name="q" placeholder="Input tag" value="{{ q|default:""}}">
-              <ul id="main-search-suggestions">
-              </ul>
-            </div>
-            <input type="submit" value="Search">
-        </form>
-    </div>
-    <div class="main_images_href">
-        {% for image in images %}
-        <a href="#">
-            <img src={%thumbnail image.image 150x150%}>
-        </a>
-        {% endfor %}
-    </div>
-    <div>
-      <ul class="tag_list">
-        {% for tag in tags %}
-          <li>
-            <a href="{% url 'images:image_list' %}?q={{ tag.name }}">{{ tag.name }}({{ tag.count }})</a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-</body>
-</html>
+{% block title %}
+    {% if q %}{{q}}{% else %}All posts{% endif %}
+    {% if is_paginated %}| Page {{page_obj.number}}{% endif %}
+    | PicTag
+{% endblock %}
+
+{% block content %}
+
+<main>
+    {% include 'images/includes/tags_sidebar.html' %}
+    <section class="content">
+        <ul class="picture-list">
+            {% for image in images %}
+                <li>
+                    <a href="{% url 'images:image-detail' image.pk %}" %}>
+                        <img src="{% thumbnail image.image 150x150 %}">
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+        {% if is_paginated %}
+            <ul class="pagination">
+                {% for page in paginator.page_range %}
+                <li{% if page_obj.number == page %} class="current"{% endif %}>
+                    {% if page_obj.number != page %}
+                        <a href="?{% if q %}q={{ q }}&{% endif %}page={{ page }}">{{ page }}</a>
+                    {% else %}
+                        {{ page }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    </section>
+</main>
+
+ {% endblock %}
