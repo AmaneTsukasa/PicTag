@@ -13,6 +13,7 @@ class RegistrationView(CreateView):
 class LogInView(BaseLoginView):
     template_name = 'users/login.html'
     redirect_field_name = 'next'
+    next_page = '/profile/'
 
 class LogOutView(BaseLogoutView):
     redirect_field_name = 'next'
